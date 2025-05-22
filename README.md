@@ -53,3 +53,22 @@ Bitacora de comandos de la clase SIS 252
 |  &no shutdown   |  Enciende la interface  |   | 
 |  &description TEXT   |  Agregamos una descripcion a la interfaz para ayudamemoria  |   |
 |  &exit   | Salimos del modo interface   |   |
+
+
+# Configuracion Switch
+# Configuración de Switch y VLAN
+
+| *Comando* | *Información* | *Tips* |
+|:----------|:--------------|:-------|
+| `show mac-address-table` | Muestra la tabla CAM del switch | Útil para verificar las direcciones MAC conectadas |
+| `show int gi0/1` | Vemos la MAC del router para verificar su pertenencia | Identifica la conexión al router |
+| `show vlan1` | Muestra la configuración de la VLAN 1 | Por defecto, VLAN 1 está habilitada |
+| `configure terminal` | Entra al modo de configuración global | Necesario para realizar cambios en el switch |
+| `host SLAN2` | Cambia el nombre del switch | Ayuda a identificar el dispositivo |
+| `interface vlan 1` | Configura la interfaz VLAN 1 | VLAN por defecto para administración |
+| `ip address 192.168.116.3 255.255.255.128` | Asigna una IP al switch para administración | Segunda IP utilizable de la red |
+| `description IP de admin del SW` | Agrega una descripción a la interfaz | Facilita la identificación de la interfaz |
+| `no shutdown` | Activa la interfaz VLAN 1 | No siempre necesario, ya que VLAN 1 está activa por defecto |
+| `exit` | Sale del modo de configuración actual | Útil para volver al nivel anterior |
+| `ip default-gateway 192.168.116.126` | Configura el gateway predeterminado del switch | Necesario para la conectividad fuera de la red local |
+| `show ip interface brief` | Verifica el estado de las interfaces | Revisa el estado y configuración de VLAN 1 |
