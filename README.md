@@ -89,3 +89,38 @@ Convenciones para indicar modos:
 | `$ip default-gateway 192.168.116.126`      | Configura la puerta de enlace del switch                      | Necesaria para conexión fuera de la red local            |
 | `#show ip interface brief`                | Muestra un resumen del estado de interfaces                   | Verifica si la VLAN 1 está activa y con IP asignada      |
 
+
+
+## 📦 Configuración de DHCPv6 con Pool
+
+| **Comando**                                 | **Descripción**                                                  | **Tips**                                                     |
+|---------------------------------------------|------------------------------------------------------------------|--------------------------------------------------------------|
+| `$ipv6 dhcp pool NOMBRE_POOL`              | Crea un pool DHCPv6 con el nombre especificado                   | Puedes usar un nombre representativo como `RED-LAN6`         |
+| `&address prefix 2001:DB8:1::/64`           | Define el prefijo de red que se asignará a los clientes          | Asegúrate de que este prefijo sea válido y esté enrutado     |
+| `&dns-server 2001:4860:4860::8888`          | Define un servidor DNS para los clientes                         | Puedes usar DNS público de Google IPv6                       |
+| `&domain-name ejemplo.com`                 | Asigna un nombre de dominio a los clientes                       | Opcional pero útil                                           |
+| `&exit`                                    | Sale del modo de configuración del pool                          |                                                              |
+| `$interface fa0/0`                         | Entra a la interfaz donde se ofrecerá el servicio DHCPv6         | Debe ser una interfaz activa y conectada a la red LAN        |
+| `&ipv6 address 2001:DB8:1::1/64`           | Asigna dirección IPv6 a la interfaz                              | Debe coincidir con el prefijo del pool                      |
+| `&ipv6 dhcp server NOMBRE_POOL`            | Asocia el pool DHCPv6 a la interfaz                              | Usa el nombre que diste al pool                             |
+| `&ipv6 nd other-config-flag`              | Indica que hay parámetros adicionales mediante DHCPv6            | Obligatorio si no estás usando SLAAC                        |
+| `&no shutdown`                             | Activa la interfaz                                               |                                                              |
+| `&exit`                                    | Sale del modo interfaz                                           |                                                              |
+
+---
+
+## 🧱 Creación y Configuración de VLAN en Switch
+
+| **Comando**               | **Descripción**                                           | **Tips**                                             |
+|---------------------------|-----------------------------------------------------------|------------------------------------------------------|
+| `$vlan 10`               | Crea una VLAN con ID 10                                   | Puedes usar cualquier número del 2 al 4094           |
+| `&name VENTAS`           | Asigna un nombre descriptivo a la VLAN                    | Opcional, pero útil para organización                |
+| `&exit`                  | Sale de la configuración de la VLAN                       |                                                      |
+| `$interface fa0/2`       | Entra a configurar una interfaz física                    | Reemplaza por el puerto que deseas configurar        |
+| `&switchport mode access`| Configura la interfaz como puerto de acceso               | Requerido para asignar una VLAN                     |
+| `&switchport access vlan 10`| Asocia la interfaz a la VLAN 10                         | Asegúrate que la VLAN ya exista                     |
+| `&description PC de ventas`| Añade una descripción a la interfaz                     | Mejora la documentación                             |
+| `&no shutdown`           | Activa la interfaz si está deshabilitada                  |                                                      |
+| `&exit`                  | Sale del modo de interfaz                                 |                                                      |
+| `#show vlan brief`       | Verifica la configuración de VLANs                        | Muestra qué puertos están asignados a qué VLAN      |
+
