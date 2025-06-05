@@ -118,6 +118,7 @@ Convenciones para indicar modos:
 | `&no auto-summary`             | Desactiva el resumen automático de rutas claseful           | Necesario cuando usas subredes                             |
 | `&passive-interface [int/n/n]` | Evita enviar anuncios RIP por una interfaz específica       | Útil en interfaces de acceso hacia hosts (como VLANs)      |
 | `&network [RED_LOCAL]`         | Incluye una red directamente conectada en el proceso RIP    | Debes usar la red **no la IP de la interfaz**              |
+| `show ip protocols`         | Ver la tabla de protocolos de un router|           |
 
 ---
 
