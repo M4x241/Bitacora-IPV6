@@ -1,46 +1,60 @@
-# Bitacora-IPV6
-Bitacora de comandos de la clase SIS 252
-- *#*: modo encendido
-- *$*: modo configure terminal
-- *&*: modo interface
+# 📘 Bitácora de Comandos – SIS 252: Redes 2
 
-| *Comando* | *Informacion* | *Tips* |
-|:--------|:--------:|:--------:|
-|  enable   |  Enciende el equip   |     |
-|  #configure terminal   |  Row 2   |    |
+Bitácora de comandos utilizados en clase.  
+Convenciones para indicar modos:
+- `#`: modo privilegiado (enable)
+- `$`: modo de configuración global (`configure terminal`)
+- `&`: modo de configuración de interfaz (`interface`, `line vty`, `vlan`, etc.)
 
-# Configuracion Router IPV4
+---
 
-| *Comando* | *Informacion* | *Tips* |
-|:--------|:--------:|:--------:|
-|  $hostname NAME  |  Cambia el nombre a nuestro router  |     |
-|  $interface fa0/0   |  Entramos a configurar la interfaz de la red mencionada   |    |
-|  &ip address 'IPV4' 'MASK'  |  Asignamos la un host a nuestra router   |  Idealmente sera el gateway de esa seccion | 
-|  &no shutdown   |  Enciende la interface  |   | 
-|  &description TEXT   |  Agregamos una descripcion a la interfaz para ayudamemoria  |   |
-|  &exit   | Salimos del modo interface   |   |
+## 🔧 Comandos Básicos
 
+| **Comando**             | **Descripción**                                | **Tips**                            |
+|-------------------------|------------------------------------------------|-------------------------------------|
+| `#enable`               | Entra al modo privilegiado                     | Necesario antes de hacer cambios    |
+| `$configure terminal`   | Entra al modo de configuración global          | Permite configurar el equipo        |
 
-# Configuracion Telnet
-| *Comando* | *Informacion* | *Tips* |
-|:--------|:--------:|:--------:|
-|  $hostname NAME   |    |   | 
-|  $username NAME privilege 15 secret PASSWORD  | creamos un usuario y contrasena para el router  | Los privilegios son 0-15, 15 mayor  | 
-|  $line vty 0 4  |  Entramos a configurar las líneas virtuales para Telnet  |  los numeros son cuantas sesiones pueden estar activas   |
-|  &login local  |  Habilitamos el acceso con el usuario local configurado  |   |
-|  &transport input telnet |    |    |
-|  &exit  |  Salimos del modo de configuración de líneas virtuales  |   |
-|  $*interface vlan1*   |  Modo interface de la VLAN seleccionada   |     |
-|  &ip address IPV4   |  Anadimos un host en donde estara habiliado la IPV6   |    |
-|  &description [STRING]   |  Row 2   |    |
-|  &exit   |  Row 2   |    |
-|  $ip default-gateway IPV4   |  Row 2   |    |
-|||
-| *EXTRA TIP* | BORRAR CONFIGURACION DE USUARIO  | *EXTRA TIP* |
-|  $dir flash:/ | Listamos los archivos de configuracion de ese directorio | |
-|  $delete flas:vlan | Borramos el archivo de la configuracion de la VLAN | |
-|  $delete flas:config.test |  | |
+---
 
+## 🌐 Configuración de Router IPv4
+
+| **Comando**                 | **Descripción**                                      | **Tips**                                     |
+|-----------------------------|------------------------------------------------------|----------------------------------------------|
+| `$hostname NOMBRE`          | Cambia el nombre del dispositivo                     | Útil para identificar el router              |
+| `$interface fa0/0`          | Entra a la interfaz FastEthernet 0/0                 | Usa `GigabitEthernet` si aplica              |
+| `&ip address IP MASK`       | Asigna IP y máscara a la interfaz                    | Generalmente el gateway de esa red           |
+| `&no shutdown`              | Activa la interfaz                                   | Sin esto, la interfaz queda apagada          |
+| `&description TEXTO`        | Agrega una descripción a la interfaz                 | Mejora la documentación del proyecto         |
+| `&exit`                     | Sale del modo de interfaz                            | Retorna al modo `$`                          |
+
+---
+
+## 📞 Configuración de Telnet
+
+| **Comando**                                        | **Descripción**                                                  | **Tips**                                           |
+|----------------------------------------------------|------------------------------------------------------------------|----------------------------------------------------|
+| `$hostname NOMBRE`                                | Cambia el nombre del dispositivo                                 |                                                     |
+| `$username USUARIO privilege 15 secret PASSWORD`   | Crea un usuario con contraseña y nivel de privilegio             | Privilegio 15 = acceso completo                    |
+| `$line vty 0 4`                                    | Entra a configuración de líneas virtuales para acceso Telnet     | Hasta 5 sesiones remotas simultáneas              |
+| `&login local`                                     | Usa la base local de usuarios                                    |                                                     |
+| `&transport input telnet`                          | Habilita el protocolo Telnet                                     |                                                     |
+| `&exit`                                            | Sale del modo de configuración de línea                          |                                                     |
+| `$interface vlan1`                                 | Entra a la interfaz VLAN 1                                       | VLAN de administración predeterminada             |
+| `&ip address IP MASK`                              | Asigna una IP a la VLAN                                          | Permite el acceso remoto al switch/router         |
+| `&description TEXTO`                               | Agrega una descripción a la interfaz VLAN                        |                                                     |
+| `&exit`                                            | Sale del modo de interfaz                                        |                                                     |
+| `$ip default-gateway IP`                           | Define la puerta de enlace por defecto                           | Necesario para conectividad externa               |
+
+---
+
+## 🧹 Limpieza de Configuración
+
+| **Comando**                 | **Descripción**                                      | **Tips**                                    |
+|-----------------------------|------------------------------------------------------|---------------------------------------------|
+| `#dir flash:/`              | Lista los archivos en la memoria flash               | Revisa antes de borrar archivos             |
+| `#delete flash:vlan.dat`    | Borra la configuración de VLAN almacenada            | Se regenera tras reiniciar el switch        |
+| `#delete flash:config.text` | Elimina la configuración guardada                    | El router arranca sin configuración previa  |
 
 
 # Configuracion Router IPV6 LINK LOCAL
