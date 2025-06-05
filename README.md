@@ -124,3 +124,34 @@ Convenciones para indicar modos:
 | `&exit`                  | Sale del modo de interfaz                                 |                                                      |
 | `#show vlan brief`       | Verifica la configuración de VLANs                        | Muestra qué puertos están asignados a qué VLAN      |
 
+
+## 🔁 Configurar un Switch Capa 3 como Router
+
+Un **Switch Capa 3 (multicapa)** permite enrutar entre VLANs sin necesidad de un router externo. Para esto se habilita el enrutamiento IP y se usan interfaces VLAN como puertas de enlace.
+
+| **Comando**             | **Descripción**                              | **Tips**                                     |
+|-------------------------|----------------------------------------------|----------------------------------------------|
+| `#configure terminal`   | Entra al modo de configuración global        |                                               |
+| `$ip routing`           | Habilita el enrutamiento entre interfaces    | Esencial para inter-VLAN routing              |
+| `$vlan 10`                         | Crea la VLAN 10                                     |                                                  |
+| `&name VENTAS`                     | Nombra la VLAN 10                                   |                                                  |
+| `&exit`                            | Sale del modo VLAN                                  |                                                  |
+| `$interface vlan 10`              | Entra a la interfaz VLAN 10                         | Estas interfaces actuarán como gateways         |
+| `&ip address 192.168.10.1 255.255.255.0` | Asigna IP a la interfaz VLAN                   | Será el gateway para la red de esa VLAN         |
+| `&no shutdown`                     | Activa la interfaz                                  |                                                  |
+| `&exit`                            | Sale del modo interfaz                              |                                                  |
+| `$interface vlan 20`              | Repetir para otra VLAN (ej. VLAN 20)                |                                                  |
+| `&ip address 192.168.20.1 255.255.255.0` |                                                  |                                                  |
+| `&no shutdown`                     |                                                    |                                                  |
+| `&exit`                            |                                                    |                                                  |
+| `$interface fa0/2`                 | Entra al puerto que va a la PC de ventas            | Cambia según el puerto usado                 |
+| `&switchport mode access`          | Configura como puerto de acceso                     |                                              |
+| `&switchport access vlan 10`       | Asocia el puerto a la VLAN 10                       |                                              |
+| `&description PC de Ventas`        | Añade descripción                                   |                                              |
+| `&no shutdown`                     | Activa el puerto si está apagado                    |                                              |
+| `&exit`                            | Repite para cada puerto y VLAN correspondiente      |                                              |
+| `#show vlan brief`       | Verifica las VLANs existentes y puertos asignados     |
+| `#show ip interface brief`| Muestra las interfaces VLAN y sus IPs configuradas    |
+| `#ping 192.168.20.1`     | Prueba de conectividad entre VLANs                    |
+
+
