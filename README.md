@@ -57,32 +57,35 @@ Convenciones para indicar modos:
 | `#delete flash:config.text` | Elimina la configuración guardada                    | El router arranca sin configuración previa  |
 
 
-# Configuracion Router IPV6 LINK LOCAL
+---
 
-| *Comando* | *Informacion* | *Tips* |
-|:--------|:--------:|:--------:|
-|  $hostname NAME  |  Cambia el nombre a nuestro router  |     |
-|  $interface fa0/0   |  Entramos a configurar la interfaz de la red mencionada   |    |
-|  &ipv6 address IPLOCAL link-local  |  Asignamos la un host a nuestra router   |  Se usa para conectar dos routers, IP's privadas| 
-|  &no shutdown   |  Enciende la interface  |   | 
-|  &description TEXT   |  Agregamos una descripcion a la interfaz para ayudamemoria  |   |
-|  &exit   | Salimos del modo interface   |   |
+## 🌐 Configuración de Router IPv6 (Link-Local)
 
+| **Comando**                           | **Descripción**                                            | **Tips**                                               |
+|---------------------------------------|------------------------------------------------------------|--------------------------------------------------------|
+| `$hostname NOMBRE`                   | Cambia el nombre del router                                | Ayuda a identificar el dispositivo                     |
+| `$interface fa0/0`                   | Entra a la interfaz FastEthernet 0/0                       | Puede variar según el modelo                           |
+| `&ipv6 address IP_LOCAL link-local`  | Asigna una dirección IPv6 link-local a la interfaz         | Se usa para conectar routers directamente (IP privadas)|
+| `&no shutdown`                       | Activa la interfaz                                         | Necesario para que funcione                            |
+| `&description TEXTO`                | Agrega una descripción a la interfaz                       | Útil como ayuda memoria                                |
+| `&exit`                              | Sale del modo de interfaz                                  | Regresa al modo `$`                                    |
 
-# Configuracion Switch
-# Configuración de Switch y VLAN
+---
 
-| *Comando* | *Información* | *Tips* |
-|:----------|:--------------|:-------|
-| `show mac-address-table` | Muestra la tabla CAM del switch | Útil para verificar las direcciones MAC conectadas |
-| `show int gi0/1` | Vemos la MAC del router para verificar su pertenencia | Identifica la conexión al router |
-| `show vlan1` | Muestra la configuración de la VLAN 1 | Por defecto, VLAN 1 está habilitada |
-| `configure terminal` | Entra al modo de configuración global | Necesario para realizar cambios en el switch |
-| `host SLAN2` | Cambia el nombre del switch | Ayuda a identificar el dispositivo |
-| `interface vlan 1` | Configura la interfaz VLAN 1 | VLAN por defecto para administración |
-| `ip address 192.168.116.3 255.255.255.128` | Asigna una IP al switch para administración | Segunda IP utilizable de la red |
-| `description IP de admin del SW` | Agrega una descripción a la interfaz | Facilita la identificación de la interfaz |
-| `no shutdown` | Activa la interfaz VLAN 1 | No siempre necesario, ya que VLAN 1 está activa por defecto |
-| `exit` | Sale del modo de configuración actual | Útil para volver al nivel anterior |
-| `ip default-gateway 192.168.116.126` | Configura el gateway predeterminado del switch | Necesario para la conectividad fuera de la red local |
-| `show ip interface brief` | Verifica el estado de las interfaces | Revisa el estado y configuración de VLAN 1 |
+## 🖧 Configuración de Switch y VLAN
+
+| **Comando**                                 | **Descripción**                                               | **Tips**                                                  |
+|---------------------------------------------|---------------------------------------------------------------|-----------------------------------------------------------|
+| `#show mac-address-table`                  | Muestra la tabla CAM del switch                               | Verifica qué dispositivos están conectados               |
+| `#show int gi0/1`                          | Muestra detalles de la interfaz gi0/1                         | Útil para ver la MAC del router conectado                |
+| `#show vlan1`                              | Muestra información de la VLAN 1                              | Por defecto es la VLAN administrativa                    |
+| `#configure terminal`                      | Entra al modo de configuración global                         | Necesario para modificar configuraciones del switch      |
+| `$hostname SLAN2`                          | Cambia el nombre del switch                                   | Mejora la identificación del equipo                      |
+| `$interface vlan 1`                        | Entra a la interfaz VLAN 1                                    | VLAN administrativa por defecto                          |
+| `&ip address 192.168.116.3 255.255.255.128`| Asigna IP al switch para administración                       | Ejemplo: segunda IP utilizable de la red                 |
+| `&description IP de admin del SW`          | Agrega una descripción a la interfaz                          | Ayuda a identificar la función de la VLAN                |
+| `&no shutdown`                             | Activa la interfaz VLAN 1                                     | No siempre es necesario, depende del modelo              |
+| `&exit`                                    | Sale del modo de interfaz                                     | Regresa al modo `$`                                      |
+| `$ip default-gateway 192.168.116.126`      | Configura la puerta de enlace del switch                      | Necesaria para conexión fuera de la red local            |
+| `#show ip interface brief`                | Muestra un resumen del estado de interfaces                   | Verifica si la VLAN 1 está activa y con IP asignada      |
+
