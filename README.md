@@ -108,6 +108,18 @@ Convenciones para indicar modos:
 | `&exit`                                    | Sale del modo interfaz                                           |                                                              |
 
 ---
+### 🔧 Activar y Configurar RIP v2
+---
+
+| **Comando**                     | **Descripción**                                              | **Tips**                                                   |
+|----------------------------------|--------------------------------------------------------------|------------------------------------------------------------|
+| `$router rip`                   | Inicia el proceso de configuración de RIP                   | Debes estar en modo de configuración global                |
+| `&version 2`                    | Establece RIP versión 2 (más segura y compatible con VLSM)  | Obligatorio para evitar usar la versión antigua            |
+| `&no auto-summary`             | Desactiva el resumen automático de rutas claseful           | Necesario cuando usas subredes                             |
+| `&passive-interface [int/n/n]` | Evita enviar anuncios RIP por una interfaz específica       | Útil en interfaces de acceso hacia hosts (como VLANs)      |
+| `&network [RED_LOCAL]`         | Incluye una red directamente conectada en el proceso RIP    | Debes usar la red **no la IP de la interfaz**              |
+
+---
 
 ## 🧱 Creación y Configuración de VLAN en Switch
 
