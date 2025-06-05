@@ -144,7 +144,7 @@ Un **Switch Capa 3 (multicapa)** permite enrutar entre VLANs sin necesidad de un
 | `&ip address 192.168.20.1 255.255.255.0` |                                                  |                                                  |
 | `&no shutdown`                     |                                                    |                                                  |
 | `&exit`                            |                                                    |                                                  |
-| `$interface fa0/2`                 | Entra al puerto que va a la PC de ventas            | Cambia según el puerto usado                 |
+| `$interface fa0/2`                 | Entra al puerto que va a la PC                      | Cambia según el puerto usado                 |
 | `&switchport mode access`          | Configura como puerto de acceso                     |                                              |
 | `&switchport access vlan 10`       | Asocia el puerto a la VLAN 10                       |                                              |
 | `&description PC de Ventas`        | Añade descripción                                   |                                              |
