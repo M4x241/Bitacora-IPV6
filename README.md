@@ -168,3 +168,40 @@ Un **Switch Capa 3 (multicapa)** permite enrutar entre VLANs sin necesidad de un
 | `#ping 192.168.20.1`     | Prueba de conectividad entre VLANs                    |
 
 
+
+
+switchport trunk allowed vlan 100,200,300
+ switchport mode trunk
+ switchport nonegotiate
+
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+ switchport trunk allowed vlan 100,200,300
+ switchport mode trunk
+ switchport nonegotiate
+spanning-tree vlan 100,200,300 priority 24576  //swt3
+
+
+
+ //juniper
+set interfaces ge-0/0/2 unit 0 family ethernet-switching vlan members <nombre o id vlan> //asocia interfaz a una vlan
+		set interfaces ge0/0/0 unit 0 family ethernet-switching interface-mode access/trunk // define el modo de la interfaz
+
+
+
+
+!
+ip dhcp pool DATOS
+ network 172.18.100.0 255.255.254.0
+ default-router 172.18.101.254
+ dns-server 8.8.8.8
+ip dhcp pool SECRETARIA
+ network 172.18.96.0 255.255.252.0
+ default-router 172.18.99.254
+ dns-server 8.8.8.8
+ip dhcp pool RECTORADO
+ network 172.18.102.0 255.255.255.0
+ default-router 172.18.102.254
+ dns-server 8.8.8.8
+!
